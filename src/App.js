@@ -37,7 +37,7 @@ class App extends React.Component  {
     render(){
       console.log(this.state.notes);
   return (
-    <diMake A Change v className="App">
+    <div className="App">
       <header className="App-header">
         <h1>Make A Change!</h1>
  <TextInput addNote={this.addNote}/>
