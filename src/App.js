@@ -33,13 +33,12 @@ class App extends React.Component  {
     }
     editNote(index){
       console.log("editing");
-    }
+    }yarn 
     render(){
       console.log(this.state.notes);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Make a nre change!!</h1>
  <TextInput addNote={this.addNote}/>
  <br/>
  <NotesList notes = {this.state.notes} editNote={this.editNote} deleteNote={this.deleteNote}/>
