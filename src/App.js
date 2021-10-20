@@ -8,10 +8,12 @@ class App extends React.Component  {
     super(props);
     this.state = {
       notes:[],
+      isEdit: false
       }  
       this.addNote = this.addNote.bind(this);
       this.deleteNote = this.deleteNote.bind(this);
       this.editNote = this.editNote.bind(this);
+      this.handleIsEdit = this.handleIsEdit.bind(this);
     }
   
     addNote(note){
@@ -21,6 +23,10 @@ class App extends React.Component  {
         return {...oldState, notes: newNotes}
         
       })
+    }
+
+    handleIsEdit(status) {
+      this.setState({isEdit: status})
     }
 
     deleteNote(index){
@@ -33,16 +39,16 @@ class App extends React.Component  {
     }
     editNote(index){
       console.log("editing");
-    }yarn 
+    }
     render(){
       console.log(this.state.notes);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Make A Change!</h1>
- <TextInput addNote={this.addNote}/>
+        <h1>Make A New Change!</h1>
+ <TextInput addNote={this.addNote} notes = {this.state.notes} editNote={this.editNote} isEdit={this.state.isEdit}/>
  <br/>
- <NotesList notes = {this.state.notes} editNote={this.editNote} deleteNote={this.deleteNote}/>
+ <NotesList notes = {this.state.notes} editNote={this.editNote} isEditFunc={this.handleIsEdit} deleteNote={this.deleteNote}  isEdit={this.state.isEdit}/>
  </header>
  </div>
   );}

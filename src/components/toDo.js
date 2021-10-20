@@ -7,8 +7,10 @@ import React, { useState } from "react"
 
 function ToDo(props){
   const [currentState, setStateFunc] = useState(false)
+ 
   function handleOpenModal (e) {
       e.preventDefault()
+      props.isEditFunc(true)
     setStateFunc(!currentState)
   }
 function handleCloseModal (e) {
@@ -38,7 +40,7 @@ return <div style={{
            contentLabel="Minimal Modal Example">
                <div>
                     <button onClick={handleCloseModal}>Close Modal</button>
-                    <TextInput/>
+                    <TextInput note = {props.note} title={props.title} todo={props.todo} editNote={props.editNote} isEdit={props.isEdit}/>
                 </div>
         </ReactModal>
 </div>;

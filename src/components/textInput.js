@@ -8,11 +8,14 @@ export default class InputText extends React.Component {
         this.state = {
             text: '',
             title:""
-    
             };
             this.handleTitleChange = this.handleTitleChange.bind(this);
             this.handleTextChange = this.handleTextChange.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
+          }
+
+          componentDidUpdate(props){
+            console.log(props.isEdit);
           }
 
           handleTitleChange(event) {
@@ -32,7 +35,11 @@ export default class InputText extends React.Component {
                 date: new Date(),
                 id: uuidv4()
             }
+            if(this.props.isEdit){
+              this.props.editNote(note)
+            }else{
             this.props.addNote(note)
+            }
 
             this.setState({text:"", title:''}) 
          
@@ -42,11 +49,12 @@ export default class InputText extends React.Component {
             return (
               <form onSubmit={this.handleSubmit}>
           
-                 <input tyoe="text" style={{ textAlign: 'center'}} placeholder="Note Title" value={this.state.title} onChange={this.handleTitleChange} />
+                 <input tyoe="text" style={{ textAlign: 'center'}} placeholder="Note Title" value={this.props.title} onChange={this.handleTitleChange} />
                  <br/>
-                  <TextareaAutosize style={{resize:'none', textAlign: 'center'}}placeholder="Add note here" value={this.state.text} onChange={this.handleTextChange} />
+                  <TextareaAutosize style={{resize:'none', textAlign: 'center'}}placeholder="Add note here" value={this.props.todo} onChange={this.handleTextChange} />
                <br/>
-                <input type="submit" value="ADD" />
+
+               {!this.props.isEdit ? <input type="submit" value="ADD" />:<input type="submit" value="EDIT"/> }
               </form>
             );
           }
