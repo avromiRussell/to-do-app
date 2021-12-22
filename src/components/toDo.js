@@ -37,10 +37,11 @@ return <div style={{
   <button onClick={handleOpenModal}  >Edit Note </button> 
         <ReactModal
            isOpen={currentState}
+           ariaHideApp={false}
            contentLabel="Minimal Modal Example">
                <div>
                     <button onClick={handleCloseModal}>Close Modal</button>
-                    <TextInput note = {props.note} title={props.title} todo={props.todo} editNote={props.editNote} isEdit={props.isEdit}/>
+                    <TextInput note = {props.note} id={props.idToPass} title={props.title} date={props.date} todo={props.todo} editNote={props.editNote} isEditFunc={props.isEditFunc} isEdit={props.isEdit} closeMod={handleCloseModal}/>
                 </div>
         </ReactModal>
 </div>;

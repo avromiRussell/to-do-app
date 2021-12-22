@@ -37,12 +37,16 @@ class App extends React.Component  {
         this.setState({notes:newNotes})
       }
     }
-    editNote(index){
-      console.log("editing");
+    editNote(newNote){
+      console.log("strating edit");
+      const {id, updatedDate, title, text} = newNote
+
+      console.log(id, updatedDate, title, text);
     }
     render(){
       console.log(this.state.notes);
   return (
+    
     <div className="App">
       <header className="App-header">
         <h1>Make A New Change!</h1>

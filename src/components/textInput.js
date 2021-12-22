@@ -6,8 +6,8 @@ export default class InputText extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
-            title:""
+            text: props.todo,
+            title: props.title
             };
             this.handleTitleChange = this.handleTitleChange.bind(this);
             this.handleTextChange = this.handleTextChange.bind(this);
@@ -29,19 +29,29 @@ export default class InputText extends React.Component {
           handleSubmit(event) {
             event.preventDefault();
             if(this.state.text.length === 0) return
-            const note = {
+          
+            if(this.props.isEdit){
+              const newNote = {
+                title: this.state.title,
+                text: this.state.text,
+                date: this.props.date,
+                updatedDate: new Date(),
+                id: this.props.id
+              }
+              this.props.editNote(newNote)
+              this.props.isEditFunc(false)
+              this.props.closeMod()
+            }else{
+              const note = {
                 title: this.state.title,
                 text: this.state.text,
                 date: new Date(),
                 id: uuidv4()
-            }
-            if(this.props.isEdit){
-              this.props.editNote(note)
-            }else{
-            this.props.addNote(note)
+              }
+              this.props.addNote(note)
             }
 
-            this.setState({text:"", title:''}) 
+            this.setState({text:"", title:""}) 
          
           }
         
@@ -49,9 +59,9 @@ export default class InputText extends React.Component {
             return (
               <form onSubmit={this.handleSubmit}>
           
-                 <input tyoe="text" style={{ textAlign: 'center'}} placeholder="Note Title" value={this.props.title} onChange={this.handleTitleChange} />
+                 <input type="text" style={{ textAlign: 'center'}} placeholder="Note Title" value={this.state.title} onChange={this.handleTitleChange} />
                  <br/>
-                  <TextareaAutosize style={{resize:'none', textAlign: 'center'}}placeholder="Add note here" value={this.props.todo} onChange={this.handleTextChange} />
+                  <TextareaAutosize style={{resize:'none', textAlign: 'center'}}placeholder="Add note here" value={this.state.text} onChange={this.handleTextChange} />
                <br/>
 
                {!this.props.isEdit ? <input type="submit" value="ADD" />:<input type="submit" value="EDIT"/> }
