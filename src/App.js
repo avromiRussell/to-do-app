@@ -39,9 +39,14 @@ class App extends React.Component  {
     }
     editNote(newNote){
       console.log("strating edit");
+      console.log(newNote);
       const {id, updatedDate, title, text} = newNote
-
-      console.log(id, updatedDate, title, text);
+      const newNotes = this.state.notes
+      let noteToEdit = newNotes.find(o => o.id === id);
+      noteToEdit.title = title;
+      noteToEdit.text = text;
+//get some feedback on the new array here ?!?!
+     
     }
     render(){
       console.log(this.state.notes);

@@ -41,6 +41,7 @@ export default class InputText extends React.Component {
               this.props.editNote(newNote)
               this.props.isEditFunc(false)
               this.props.closeMod()
+            
             }else{
               const note = {
                 title: this.state.title,
